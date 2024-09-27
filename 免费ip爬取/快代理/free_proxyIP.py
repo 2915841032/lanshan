@@ -4,7 +4,6 @@ from lxml import etree
 import time
 import csv
 import random
-
 url = 'https://www.kuaidaili.com/free/inha/{}/'
 alive_ip = []
 
