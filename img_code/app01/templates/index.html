@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="/verify_captcha/">
+    {% csrf_token %}
+    <div>
+        <label for="captcha">验证码：</label>
+        <input type="text" id="captcha" name="captcha" required>
+        <img src="{% url 'captcha' %}" alt="验证码" onclick="this.src='{% url 'captcha' %}?'+Math.random();">
+    </div>
+    <button type="submit">提交</button>
+</form>
+
+</body>
+</html>
