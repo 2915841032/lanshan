@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chunked File Upload</title>
+</head>
+<body>
+    <h2>Upload Large File (Chunked)</h2>
+    <input type="file" id="fileInput"><br><br>
+    <button onclick="uploadChunked()">Upload</button>
+
+    <script>
+        function uploadChunked() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) {
+                alert("Please select a file.");
+                return;
+            }
+
+            const chunkSize = 1024 * 1024;  // 1MB per chunk
+            const totalChunks = Math.ceil(file.size / chunkSize);
+
+            const formData = new FormData();
+            let currentChunk = 0;
+
+            function uploadNextChunk() {
+                const start = currentChunk * chunkSize;
+                const end = Math.min(start + chunkSize, file.size);
+                const chunk = file.slice(start, end);
+
+                formData.append('file', chunk, file.name);
+                formData.append('chunk', currentChunk);
+                formData.append('total_chunks', totalChunks);
+
+                // Send chunk to server
+                fetch('/upload-chunked/', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Chunk uploaded:', data);
+                    currentChunk++;
+                    if (currentChunk < totalChunks) {
+                        uploadNextChunk();
+                    } else {
+                        alert('File upload complete');
+                    }
+                })
+                .catch(err => console.error('Upload error:', err));
+            }
+
+            uploadNextChunk();
+        }
+    </script>
+</body>
+</html>
