@@ -15,7 +15,7 @@ def generate_verification_code():
 # 生成验证码图片
 def generate_image(code):
 	# 创建一个新的白色背景图片，尺寸为 80x80
-	image = Image.new('RGB', (80, 80), color=(255, 255, 255))
+	image = Image.new('RGB', (80, 40), color=(255, 255, 255))
 
 	# 获取绘制对象
 	draw = ImageDraw.Draw(image)
@@ -30,7 +30,7 @@ def generate_image(code):
 
 	# 在图片上绘制验证码文本
 	text_width, text_height = draw.textsize(code, font=font)
-	position = ((80 - text_width) // 2, (80 - text_height) // 2)  # 居中显示
+	position = ((80 - text_width) // 2, (40 - text_height) // 2)  # 居中显示
 	draw.text(position, code, font=font, fill=(0, 0, 0))  # 黑色字体
 
 	return image
