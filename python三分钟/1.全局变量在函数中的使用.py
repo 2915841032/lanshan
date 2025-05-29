@@ -3,7 +3,7 @@
 # @Author : 阿波
 # @Time : 2023/8/31 22:03
 # @Software: PyCharm
-count=99
+count=97
 def quguan():
     global count
     count = count - 1

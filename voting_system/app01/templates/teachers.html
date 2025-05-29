@@ -1,0 +1,44 @@
+<!DOCTYPEhtml>
+{% load static %}
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <title>老师</title>
+       <!-- 此处略去了层叠样式表的选择器 -->
+</head>
+<body>
+       <h1>{{ subject.name }}学科老师信息</h1>
+       <hr>
+       <!-- 如果有老师信息，循环显示 -->
+      {% if teachers %}
+      {% for teacher in teachers %}
+       <div>
+             <div>
+                   <!-- 显示老师照片 -->
+                   <img src="{% static teacher.photo %}"alt="">
+             </div>
+             <div>
+                   <h3>{{ teacher.name }}</h3>
+                   <p>{{ teacher.detail }}</p>
+                   <p class="comment">
+                         <!-- 好评链接和数量 -->
+                         <a href="">好评</a>
+                        (<span>{{ teacher.good_count }}</span>)
+                         <!-- 差评链接和数量 -->
+                         <a href="">差评</a>
+                        (<span>{{ teacher.bad_count }}</span>)
+                   </p>
+             </div>
+       </div>
+      {% endfor %}
+       <!-- 如果没有老师信息，显示提示 -->
+      {% else %}
+       <h3>暂时没有该学科的老师信息</h3>
+      {% endif %}
+       <p>
+             <!-- 返回首页链接 -->
+             <a href="/">返回首页</a>
+       </p>
+</body>
+
+</html>

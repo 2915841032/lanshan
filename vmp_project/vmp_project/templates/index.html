@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>VMP JS Sign Demo</title>
+</head>
+<body>
+  <h3>发送 VMP 签名请求</h3>
+  <button onclick="sendRequest()">Send</button>
+  <pre id="output"></pre>
+
+  <script src="./static/vmp_hun.js"></script>
+  <script>
+    function sendRequest() {
+      const {sign, ts} = getSign();
+      fetch(`/api/protected/?sign=${sign}&ts=${ts}`, {
+        headers: { 'User-Agent': navigator.userAgent }
+      })
+      .then(resp => resp.json())
+      .then(data => document.getElementById("output").innerText = JSON.stringify(data, null, 2));
+    }
+  </script>
+</body>
+</html>
