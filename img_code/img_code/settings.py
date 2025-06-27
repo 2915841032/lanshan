@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles','app01'
+    'django.contrib.staticfiles',
+    'app01'
 ]
 
 MIDDLEWARE = [
@@ -128,9 +129,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',  # 这里是 Redis 地址和数据库编号
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # 标准格式
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'PASSWORD': 'root',  # 如果有密码在这里单独设置
         }
     }
 }
