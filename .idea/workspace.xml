@@ -5,23 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="973c3541-6150-43aa-a095-08618613fdbc" name="更改" comment="滑动验证码项目">
-      <change afterPath="$PROJECT_DIR$/0宽字符的实现/1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/templates/captcha_app/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/captcha_app/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/slide_captcha_project/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/slide_captcha_project/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/slide_captcha_project/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/slide_captcha_project/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/slide_captcha_project/slide_captcha_project/slide_captcha_project/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -337,7 +320,7 @@
       <workItem from="1748337279324" duration="565000" />
       <workItem from="1750226376372" duration="646000" />
       <workItem from="1751026754552" duration="4003000" />
-      <workItem from="1751031079213" duration="2696000" />
+      <workItem from="1751031079213" duration="2975000" />
     </task>
     <task id="LOCAL-00001" summary="新增授权码机制V2.0和调用摄像头文件夹，包含加密解密、注册和验证功能；更新免费ip爬取/快代理文件夹，优化IP代理爬取效率。">
       <option name="closed" value="true" />
@@ -371,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751031409100</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="滑动验证码项目">
+      <option name="closed" value="true" />
+      <created>1751034247760</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1751034247760</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
