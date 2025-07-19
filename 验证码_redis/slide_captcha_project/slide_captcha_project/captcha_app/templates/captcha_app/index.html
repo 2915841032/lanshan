@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>滑动验证码示例</title>
+    <style>
+        #captcha-container {
+            position: relative;
+            width: 300px;
+            margin: 20px auto;
+        }
+        #captcha-bg {
+            width: 300px;
+            height: 150px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+        #slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            user-select: none;
+        }
+        #btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        /* 进度条容器样式 */
+        .slider-container {
+            width: 300px;
+            height: 40px;
+            margin: 10px auto;
+            position: relative;
+            background: #f0f0f0;
+            border-radius: 20px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        /* 进度条样式 */
+        .progress {
+            position: absolute;
+            height: 100%;
+            left: 0;
+            width: 0;
+            background: #4CAF50;
+            border-radius: 20px;
+            transition: width 0.1s ease;
+        }
+        /* 滑块样式 */
+        .slider-handle {
+            width: 50px;
+            height: 40px;
+            background: #fff;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-handle::before {
+            content: '→';
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">点击进行验证</button>
+    <div id="captcha-container" style="display:none;">
+        <img id="captcha-bg" src="" alt="验证码背景" />
+        <img id="slider" src="" alt="滑块" style="position: absolute; left: 0; top: 0;" />
+        <!-- 滑动条容器 -->
+        <div class="slider-container" style="position: relative; width: 300px; height: 40px; margin-top: 10px; background: #eee;">
+            <div class="progress" id="progress" style="position: absolute; height: 100%; width: 0; background: #4CAF50;"></div>
+            <div class="slider-handle" id="slider-handle" style="position: absolute; top: 0; left: 0; width: 40px; height: 40px; background: #2196F3; cursor: move; border-radius: 2px;"></div>
+        </div>
+    </div>
+
+<script>
+let isVerified = false;
+let currentCaptchaId = null; // 存储当前的验证码ID
+const btn = document.getElementById('btn');
+const captchaContainer = document.getElementById('captcha-container');
+const captchaBg = document.getElementById('captcha-bg');
+const slider = document.getElementById('slider');
+const progress = document.getElementById('progress');
+const sliderHandle = document.getElementById('slider-handle');
+
+btn.addEventListener('click', () => {
+    if (!isVerified) {
+        captchaContainer.style.display = 'block';
+        loadCaptcha();
+    } else {
+        alert('验证通过，返回数据');
+        // 这里可以发请求获取数据
+    }
+});
+
+function loadCaptcha() {
+    fetch('/get_captcha/')
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('获取验证码失败: ' + res.status);
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log('获取验证码响应:', data); // 调试日志
+
+            // 确保captcha_id存在
+            if (!data.captcha_id) {
+                throw new Error('验证码响应中缺少captcha_id');
+            }
+
+            // 保存验证码ID
+            currentCaptchaId = data.captcha_id;
+            console.log('当前captcha_id:', currentCaptchaId); // 调试日志
+
+            // 显示图片
+            captchaBg.src = 'data:image/png;base64,' + data.bg;
+            slider.src = 'data:image/png;base64,' + data.slider;
+
+            // 设置滑块位置
+            const sliderY = parseInt(data.y);
+            slider.style.top = sliderY + 'px';
+
+            // 重置位置
+            slider.style.left = '0px';
+            progress.style.width = '0%';
+            sliderHandle.style.left = '0px';
+
+            // 初始化拖动
+            initDrag();
+        })
+        .catch(error => {
+            console.error('加载验证码错误:', error);
+            alert('加载验证码失败: ' + error.message);
+        });
+}
+
+function initDrag() {
+    let originX = 0;
+    let dragging = false;
+    const containerWidth = captchaBg.offsetWidth || 300;
+
+    function handleDragStart(e) {
+        originX = e.clientX - parseInt(sliderHandle.style.left || 0);
+        dragging = true;
+        e.preventDefault();
+    }
+
+    function handleDragEnd() {
+        if (dragging) {
+            dragging = false;
+            const sliderX = parseInt(slider.style.left || 0);
+            verify(sliderX);
+        }
+    }
+
+    function handleDragMove(e) {
+        if (dragging) {
+            let moveX = e.clientX - originX;
+            if (moveX < 0) moveX = 0;
+            if (moveX > containerWidth) moveX = containerWidth;
+
+            // 同步更新验证码滑块和进度条滑块的位置
+            slider.style.left = moveX + 'px';
+            sliderHandle.style.left = moveX + 'px';
+            progress.style.width = moveX + 'px';
+        }
+    }
+
+    // 验证码滑块事件
+    slider.onmousedown = handleDragStart;
+    // 进度条滑块事件
+    sliderHandle.onmousedown = handleDragStart;
+
+    document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('mousemove', handleDragMove);
+}
+
+function verify(offset) {
+    console.log('开始验证，offset:', offset, 'captcha_id:', currentCaptchaId); // 调试日志
+
+    // 确保有验证码ID
+    if (!currentCaptchaId) {
+        alert('验证码加载失败，请重新尝试');
+        loadCaptcha();
+        return;
+    }
+
+    // 创建请求数据
+    const requestData = {
+        offset: offset,
+        captcha_id: currentCaptchaId
+    };
+
+    console.log('发送验证请求:', requestData); // 调试日志
+
+    // 发送验证请求
+    fetch('/verify_captcha/', {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('验证请求失败: ' + res.status);
+        }
+        return res.json();
+    })
+    .then(data => {
+        console.log('验证响应:', data); // 调试日志
+
+        if (data.success) {
+            alert('验证成功！');
+            isVerified = true;
+            captchaContainer.style.display = 'none';
+            btn.disabled = false;
+            btn.textContent = '点击获取数据';
+        } else {
+            alert(data.msg || '验证失败，请重试');
+            loadCaptcha();
+        }
+    })
+    .catch(error => {
+        console.error('验证错误:', error);
+        alert('验证时发生错误: ' + error.message);
+        loadCaptcha();
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+</body>
+</html>
