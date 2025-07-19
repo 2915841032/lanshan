@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973c3541-6150-43aa-a095-08618613fdbc" name="更改" comment="滑动验证码项目">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rau.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/rau.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/te.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/te.py" afterDir="false" />
-    </list>
+    <list default="true" id="973c3541-6150-43aa-a095-08618613fdbc" name="更改" comment="滑动验证码项目修复" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -406,7 +401,7 @@
       <workItem from="1751453196628" duration="1232000" />
       <workItem from="1751694686585" duration="10000" />
       <workItem from="1752373351649" duration="123000" />
-      <workItem from="1752914571996" duration="123000" />
+      <workItem from="1752914571996" duration="288000" />
     </task>
     <task id="LOCAL-00001" summary="新增授权码机制V2.0和调用摄像头文件夹，包含加密解密、注册和验证功能；更新免费ip爬取/快代理文件夹，优化IP代理爬取效率。">
       <option name="closed" value="true" />
@@ -448,7 +443,23 @@
       <option name="project" value="LOCAL" />
       <updated>1751034247760</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="滑动验证码项目">
+      <option name="closed" value="true" />
+      <created>1752914731091</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1752914731091</updated>
+    </task>
+    <task id="LOCAL-00007" summary="滑动验证码项目修复">
+      <option name="closed" value="true" />
+      <created>1752914812199</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1752914812199</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +481,8 @@
     <MESSAGE value="新增django多个文件上传和大文件分块上传" />
     <MESSAGE value="更新验证码的版本" />
     <MESSAGE value="滑动验证码项目" />
-    <option name="LAST_COMMIT_MESSAGE" value="滑动验证码项目" />
+    <MESSAGE value="滑动验证码项目修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="滑动验证码项目修复" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/lanshan$asgi.coverage" NAME="asgi 覆盖结果" MODIFIED="1733499139098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chat_room" />
